@@ -10,13 +10,14 @@ set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/Modules/")
 option(MYSQLPP_OLD_CLASS_NAMES "Enables MySQL old class names")
 
 if(NOT FIELD_LIMIT)
-  set(FIELD_LIMIT 10 "set max template query and SSQLS field count")
+  set(FIELD_LIMIT 25 "set max template query and SSQLS field count")
 endif()
 
 find_package(MySQL REQUIRED)
 find_package (Threads)
 
 include_directories(${MySQL_INCLUDE_DIR})
+enable_testing()
 
 include(CheckFunctionExists)
 include(CheckIncludeFileCXX)
@@ -46,3 +47,4 @@ configure_file(config.h.in config.h)
 include_directories(${CMAKE_CURRENT_BINARY_DIR})
 
 add_subdirectory(lib)
+add_subdirectory(test)

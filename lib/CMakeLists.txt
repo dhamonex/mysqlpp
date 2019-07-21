@@ -49,13 +49,14 @@ configure_file(mysql++.h.in mysql++.h @ONLY)
 include_directories(${CMAKE_CURRENT_BINARY_DIR})
 include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 
-add_library(mysqlpp SHARED ${mysqlpp_src})
+add_library(mysqlpp_shared SHARED ${mysqlpp_src})
 add_library(mysqlpp_static STATIC ${mysqlpp_src})
 
-set_target_properties(mysqlpp PROPERTIES VERSION ${MYSQLPP_VERSION_MAJOR}.${MYSQLPP_VERSION_MINOR}.${MYSQLPP_VERSION_BUGFIX} SOVERSION ${MYSQLPP_VERSION_MAJOR})
+set_target_properties(mysqlpp_shared PROPERTIES VERSION ${MYSQLPP_VERSION_MAJOR}.${MYSQLPP_VERSION_MINOR}.${MYSQLPP_VERSION_BUGFIX} SOVERSION ${MYSQLPP_VERSION_MAJOR})
+set_target_properties(mysqlpp_shared PROPERTIES OUTPUT_NAME mysqlpp)
 set_target_properties(mysqlpp_static PROPERTIES OUTPUT_NAME mysqlpp)
 
-target_link_libraries(mysqlpp
+target_link_libraries(mysqlpp_shared
   ${CMAKE_THREAD_LIBS_INIT}
   ${MySQL_LIBRARIES}
 )
