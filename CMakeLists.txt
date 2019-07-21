@@ -7,8 +7,11 @@ set(MYSQLPP_VERSION_BUGFIX 1)
 
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/Modules/")
 
-option(FIELD_LIMIT "set max template query and SSQLS field count" 10)
 option(MYSQLPP_OLD_CLASS_NAMES "Enables MySQL old class names")
+
+if(NOT FIELD_LIMIT)
+  set(FIELD_LIMIT 10 "set max template query and SSQLS field count")
+endif()
 
 find_package(MySQL REQUIRED)
 find_package (Threads)
@@ -16,13 +19,20 @@ find_package (Threads)
 include_directories(${MySQL_INCLUDE_DIR})
 
 include(CheckFunctionExists)
+include(CheckIncludeFileCXX)
+include(CheckLibraryExists)
+
 check_function_exists(localtime_r HAVE_LOCALTIME_R)
-check_function_exists(localtime_s MYSQLPP_HAVE_LOCALTIME_S)
 check_function_exists(getopt HAVE_POSIX_GETOPT)
 
 check_include_file(unistd.h HAVE_UNISTD_H)
 check_include_file(synch.h HAVE_SYNCH_H)
 check_include_file(libiberty.h HAVE_LIBIBERTY_GETOPT)
+
+check_include_file_cxx(ext/slist HAVE_EXT_SLIST)
+check_include_file_cxx(slist HAVE_GLOBAL_SLIST)
+
+check_library_exists(${MySQL_LIBRARIES} mysql_ssl_set "" HAVE_MYSQL_SSL_SET)
 
 if(CMAKE_THREAD_LIBS_INIT)
   set(HAVE_THREADS TRUE)
@@ -30,10 +40,6 @@ endif()
 
 if(CMAKE_USE_PTHREADS_INIT)
   set(HAVE_PTHREAD TRUE)
-endif()
-
-if(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
-  set(MYSQLPP_PLATFORM_VISUAL_CPP TRUE)
 endif()
 
 configure_file(config.h.in config.h)

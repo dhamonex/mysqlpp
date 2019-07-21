@@ -1,11 +1,18 @@
 #ifndef H_399A1565EE104E9BA0298AB86A945EAA
 #define H_399A1565EE104E9BA0298AB86A945EAA
 
+
+/* Define if you have __gnu_cxx:slist container in <ext/slist> */
+#cmakedefine HAVE_EXT_SLIST
+
+/* Define if you have ::slist container in <slist> */
+#cmakedefine HAVE_GLOBAL_SLIST
+
+/* Define if your MySQL library has SSL functions */
+#cmakedefine HAVE_MYSQL_SSL_SET
+
 /* Have localtime */
 #cmakedefine HAVE_LOCALTIME_R
-
-/* Detected localtime_s() from native RTL of VC++ 2005 and up */
-#cmakedefine MYSQLPP_HAVE_LOCALTIME_S
 
 /* Found threads */
 #cmakedefine HAVE_THREADS
@@ -15,9 +22,6 @@
 
 /* Use MySQL old class names */
 #cmakedefine MYSQLPP_OLD_CLASS_NAMES
-
-/* Found Microsoft compiler */
-#cmakedefine MYSQLPP_PLATFORM_VISUAL_CPP
 
 /* Found unistd.h header file */
 #cmakedefine HAVE_UNISTD_H
