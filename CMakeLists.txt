@@ -9,9 +9,7 @@ set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/Modules/")
 
 option(MYSQLPP_OLD_CLASS_NAMES "Enables MySQL old class names")
 
-if(NOT FIELD_LIMIT)
-  set(FIELD_LIMIT 25 "set max template query and SSQLS field count")
-endif()
+set(FIELD_LIMIT 25 CACHE STRING "set max template query and SSQLS field count")
 
 find_package(MySQL REQUIRED)
 find_package (Threads)
