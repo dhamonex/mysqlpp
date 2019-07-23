@@ -8,6 +8,7 @@ set(MYSQLPP_VERSION_BUGFIX 1)
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/Modules/")
 
 option(MYSQLPP_OLD_CLASS_NAMES "Enables MySQL old class names")
+option(ENABLE_EXAMPLES "Enables build of examples")
 
 set(FIELD_LIMIT 25 CACHE STRING "set max template query and SSQLS field count")
 
@@ -46,4 +47,7 @@ include_directories(${CMAKE_CURRENT_BINARY_DIR})
 
 add_subdirectory(lib)
 add_subdirectory(test)
-add_subdirectory(examples)
+
+if(ENABLE_EXAMPLES)
+    add_subdirectory(examples)
+endif()
