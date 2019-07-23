@@ -38,7 +38,7 @@ if(CMAKE_THREAD_LIBS_INIT)
 endif()
 
 if(CMAKE_USE_PTHREADS_INIT)
-  set(HAVE_PTHREAD TRUE)
+    set(HAVE_PTHREAD TRUE)
 endif()
 
 configure_file(config.h.in config.h)
@@ -46,3 +46,4 @@ include_directories(${CMAKE_CURRENT_BINARY_DIR})
 
 add_subdirectory(lib)
 add_subdirectory(test)
+add_subdirectory(examples)
