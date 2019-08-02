@@ -4,16 +4,22 @@ project(mysqlpp)
 set(MYSQLPP_VERSION_MAJOR 3)
 set(MYSQLPP_VERSION_MINOR 2)
 set(MYSQLPP_VERSION_BUGFIX 1)
+set(PACKAGE_VERSION "${MYSQLPP_VERSION_MAJOR}.${MYSQLPP_VERSION_MINOR}.${MYSQLPP_VERSION_BUGFIX}")
 
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/cmake/Modules/")
 
 option(MYSQLPP_OLD_CLASS_NAMES "Enables MySQL old class names")
 option(ENABLE_EXAMPLES "Enables build of examples")
+option(ENABLE_DOCS "Enable generations of docs")
 
 set(FIELD_LIMIT 25 CACHE STRING "set max template query and SSQLS field count")
 
 find_package(MySQL REQUIRED)
-find_package (Threads)
+find_package(Threads)
+
+if(ENABLE_DOCS)
+    find_package(Doxygen REQUIRED)
+endif()
 
 include_directories(${MySQL_INCLUDE_DIR})
 enable_testing()
@@ -43,10 +49,12 @@ if(CMAKE_USE_PTHREADS_INIT)
 endif()
 
 configure_file(config.h.in config.h)
+configure_file(version.in version @ONLY)
 include_directories(${CMAKE_CURRENT_BINARY_DIR})
 
 add_subdirectory(lib)
 add_subdirectory(test)
+add_subdirectory(ssx)
 
 if(ENABLE_EXAMPLES)
     add_subdirectory(examples)
