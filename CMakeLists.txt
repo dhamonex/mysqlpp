@@ -48,6 +48,9 @@ if(CMAKE_USE_PTHREADS_INIT)
     set(HAVE_PTHREAD TRUE)
 endif()
 
+set(DOXYGEN_OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/doc)
+set(DOXYGEN_HTML_HEADER ${CMAKE_CURRENT_SOURCE_DIR}/doc/html/refman/_header.html)
+
 configure_file(config.h.in config.h)
 configure_file(version.in version @ONLY)
 include_directories(${CMAKE_CURRENT_BINARY_DIR})
@@ -58,4 +61,8 @@ add_subdirectory(ssx)
 
 if(ENABLE_EXAMPLES)
     add_subdirectory(examples)
+endif()
+
+if(ENABLE_DOCS)
+    add_subdirectory(doc)
 endif()

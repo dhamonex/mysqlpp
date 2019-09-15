@@ -45,6 +45,7 @@ add_custom_command(
     WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}
 )
 
+set(DOXYGEN_LIB_INPUT ${CMAKE_SOURCE_DIR}/lib)
 configure_file(Doxyfile.in Doxyfile @ONLY)
 configure_file(mysql++.h.in mysql++.h @ONLY)
 include_directories(${CMAKE_CURRENT_BINARY_DIR})
