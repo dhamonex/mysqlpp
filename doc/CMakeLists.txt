@@ -5,10 +5,12 @@ if(TARGET Doxygen::doxygen)
     
     add_custom_command(OUTPUT html/refman/index.html
         COMMAND ${DOXYGEN_EXECUTABLE} ${PROJECT_BINARY_DIR}/lib/Doxyfile
+        DEPENDS ${PROJECT_BINARY_DIR}/lib/Doxyfile
     )
     
     add_custom_command(OUTPUT html/refman/ssx/index.html
         COMMAND ${DOXYGEN_EXECUTABLE} ${PROJECT_BINARY_DIR}/ssx/Doxyfile
+        DEPENDS ${PROJECT_BINARY_DIR}/ssx/Doxyfile
     )
     
     add_custom_target(doc 
