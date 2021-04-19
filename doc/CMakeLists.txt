@@ -1,4 +1,4 @@
-# add_custom_target(doc 
+add_subdirectory(userman)
 
 if(TARGET Doxygen::doxygen)
     get_property(DOXYGEN_EXECUTABLE TARGET Doxygen::doxygen PROPERTY IMPORTED_LOCATION)
